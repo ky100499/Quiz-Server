@@ -6,16 +6,21 @@ var util = require("util");
 router.route("/login/")
     .get(function(req, res) {
         var sess = req.session;
-        if (sess.user_id) res.redirect("/");
 
-        res.render("base", {
-            "title": "Login",
-            "msg": "",
-            "active": "login",
-            "user_idx": req.session.user_idx,
-            "user_name": req.session.user_name,
-            "page_include": "./auth/login"
-        });
+        if (sess.user_id) {
+            res.redirect("/");
+
+        } else {
+
+            res.render("base", {
+                "title": "Login",
+                "msg": "",
+                "active": "login",
+                "user_idx": req.session.user_idx,
+                "user_name": req.session.user_name,
+                "page_include": "./auth/login"
+            });
+        }
     })
     .post(function(req, res) {
         var sess = req.session;
