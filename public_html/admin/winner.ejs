@@ -1,0 +1,23 @@
+<div class="container">
+    <h3>Admin</h3>
+
+    <button class="btn btn-danger" id="reset">Reset</button>
+    <h3 id="winner"></h3>
+</div>
+
+<script>
+    $(document).ready(function(){
+        var socket = io();
+
+        socket.emit("init_winner");
+
+        socket.on("update_winner", function(data) {
+            $("#winner").text((data !== undefined && data !== null) ? data.name : "");
+        });
+
+        $("button#reset").on('click', function(e) {
+            e.preventDefault();
+            socket.emit("reset");
+        });
+    });
+</script>

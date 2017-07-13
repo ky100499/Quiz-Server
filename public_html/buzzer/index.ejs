@@ -1,9 +1,5 @@
 <div class="container">
-
-
-    <button class="btn btn-success btn-lg" id="buzzer">Buzzer</button>
-
-    <h4 class="btn_pushed">이미 눌렸습니다!</h4>
+    <button class="btn btn-buzzer btn-lg" id="buzzer">Buzzer</button>
 </div>
 
 <script>
@@ -13,6 +9,14 @@
         socket.emit("init", {
             idx: "<%= user_idx %>",
             name: "<%= user_name %>"
+        });
+
+        socket.on("update_status", function(data) {
+            if (data.clicked) {
+                $("button#buzzer").attr("disabled", true);
+            } else {
+                $("button#buzzer").attr("disabled", false);
+            }
         });
 
         $("button#buzzer").on('click', function(e) {

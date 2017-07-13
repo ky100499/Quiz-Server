@@ -1,7 +1,7 @@
 var router = require("express").Router();
 
 router.get('/users', function(req, res) {
-    if (req.session.user_idx != 602) {
+    if (/*req.session.user_idx != 602*/ !req.session.user_idx) {
         res.redirect("/");
 
     } else {
@@ -17,7 +17,7 @@ router.get('/users', function(req, res) {
     }
 });
 
-router.get('/rank', function(req, res) {
+router.get('/winner', function(req, res) {
     if (req.session.user_idx != 602) {
         res.redirect("/");
 
@@ -29,7 +29,7 @@ router.get('/rank', function(req, res) {
             "active": "",
             "user_idx": req.session.user_idx,
             "user_name": req.session.user_name,
-            "page_include": "./admin/rank"
+            "page_include": "./admin/winner"
         });
     }
 });

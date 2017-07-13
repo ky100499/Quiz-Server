@@ -29,7 +29,7 @@ app.get('/', function(req, res) {
 });
 
 var socket_ids = [];
-var rank = [];
+var winner;
 
 io.on('connection', function(socket) {
 
@@ -39,13 +39,12 @@ io.on('connection', function(socket) {
         socket.idx = data.idx;
         socket.name = data.name;
 
-        // console.log(socket_ids);
-
         response = [];
         for (i = 0; i < socket_ids.length; i++) {
             response.push(getSocketInfo(io.sockets.sockets, socket_ids[i]));
         }
         io.emit("update_users", response);
+        io.emit("update_status", {"clicked": (winner !== undefined)});
     });
 
     socket.on("disconnect", function() {
@@ -60,16 +59,11 @@ io.on('connection', function(socket) {
         }
         io.emit("update_users", response);
 
-        for (i = 0; i < rank.length; i++) {
-            if (rank[i] == socket.id) break;
+        if (winner !== undefined && winner == socket.id) {
+            winner = undefined;
         }
-        rank.splice(i, 1);
-
-        response = [];
-        for (i = 0; i < rank.length; i++) {
-            response.push(getSocketInfo(io.sockets.sockets, rank[i]));
-        }
-        io.emit("update_rank", response);
+        io.emit("update_winner", getSocketInfo(io.sockets.sockets, winner));
+        io.emit("update_status", {"clicked": (winner !== undefined)});
     });
 
     socket.on("init_users", function(data) {
@@ -80,36 +74,32 @@ io.on('connection', function(socket) {
         io.emit("update_users", response);
     });
 
-    socket.on("init_rank", function(data) {
-        response = [];
-        for (i = 0; i < rank.length; i++) {
-            response.push(getSocketInfo(io.sockets.sockets, rank[i]));
-        }
-        io.emit("update_rank", response);
+    socket.on("init_winner", function(data) {
+        io.emit("update_winner", getSocketInfo(io.sockets.sockets, winner));
     });
 
     socket.on("buzzer", function(data) {
-        for (i = 0; i < rank.length; i++) {
-            if (rank[i] == socket.id) break;
+        if (winner === undefined) {
+            winner = socket.id;
         }
-        if (i == rank.length) rank.push(socket.id);
-
-        response = [];
-        for (i = 0; i < rank.length; i++) {
-            response.push(getSocketInfo(io.sockets.sockets, rank[i]));
-        }
-        io.emit("update_rank", response);
+        io.emit("update_winner", getSocketInfo(io.sockets.sockets, winner));
+        io.emit("update_status", {"clicked": (winner !== undefined)});
     });
 
     socket.on("reset", function(data) {
-        rank = [];
-        io.emit("update_rank", []);
+        winner = undefined;
+        io.emit("update_winner", getSocketInfo(io.sockets.sockets, winner));
+        io.emit("update_status", {"clicked": (winner !== undefined)});
     });
 });
 
 function getSocketInfo(sockets, id) {
-    var socket = sockets[id];
-    return {"id": socket.id, "idx": socket.idx, "name": socket.name};
+    if (id === undefined) {
+        return undefined;
+    } else {
+        var socket = sockets[id];
+        return {"id": socket.id, "idx": socket.idx, "name": socket.name};
+    }
 }
 
 server.listen(port, function() {

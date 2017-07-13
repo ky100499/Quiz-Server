@@ -35,7 +35,7 @@ router.route("/login/")
             data.setEncoding('utf8');
             if (data.statusCode == 200) {
                 data.on('data', function (body) {
-                    if (typeof body !== Object) body = JSON.parse(body);
+                    if (typeof body !== "object") body = JSON.parse(body);
 
                     sess.user_idx = body.id;
                     sess.user_id = body.username;
