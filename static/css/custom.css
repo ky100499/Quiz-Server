@@ -106,6 +106,7 @@ div.apply .btn {
 .btn-success {
     width: 300px;
     height: 300px;
+    margin-bottom: 15px;
     background-color: #ec2a7f;
     border-color: #ec2a7f;
     border-radius: 150px;
@@ -116,7 +117,10 @@ div.apply .btn {
     border-color: #b50251;
 }
 
+.btn_pushed {
 
+  visibility: visible;
+}
 
 .table * {
     text-align: center;
