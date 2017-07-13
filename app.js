@@ -59,6 +59,17 @@ io.on('connection', function(socket) {
             response.push(getSocketInfo(io.sockets.sockets, socket_ids[i]));
         }
         io.emit("update_users", response);
+
+        for (i = 0; i < rank.length; i++) {
+            if (rank[i] == socket.id) break;
+        }
+        rank.splice(i, 1);
+
+        response = [];
+        for (i = 0; i < rank.length; i++) {
+            response.push(getSocketInfo(io.sockets.sockets, rank[i]));
+        }
+        io.emit("update_rank", response);
     });
 
     socket.on("init_users", function(data) {
