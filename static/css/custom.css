@@ -40,6 +40,7 @@ body {
 
     background-color: #3a3a3a;
 }
+
 .footer .container .text-muted {
     margin: 20px 0;
     color: #ffffff;
@@ -56,6 +57,8 @@ body {
 .navbar-inverse hr {
     border-color: #777;
 }
+
+
 /* Horizontal Lin in Navbar Block End */
 
 /*
@@ -94,6 +97,20 @@ div.apply .btn {
     background-color: #f0f0f0;
     border-color: #b8b8b8;
 }
+
+.btn-success {
+    width: auto;
+    text-align: center;
+    background-color: #ec2a7f;
+    border-color: #ec2a7f;
+}
+
+.btn-success:hover{
+    background-color: #b50251;
+    border-color: #b50251;
+}
+
+
 
 .table * {
     text-align: center;
