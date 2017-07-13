@@ -1,0 +1,107 @@
+/* Google Early Access Fonts */
+@import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
+@import url(//fonts.googleapis.com/earlyaccess/nanumgothic.css);
+
+/* Font Block */
+* {
+    font-family: "Helvetica Neue", Helvetica, "Apple SD Gothic Neo", "Noto Sans KR", "Nanum Gothic", sans-serif !important;
+}
+/* Font Block End */
+
+/* Visibility by Screen Width Block */
+@media screen and (min-width: 768px) {
+    .mobile {
+        display: none;
+    }
+    .navbar ul.right {
+        float: right;
+    }
+}
+@media screen and (max-width: 767px) {
+    .pc {
+        display: none;
+    }
+}
+/* Visibility by Screen Width Block End */
+
+/* Sticky Footer Block */
+html {
+    position: relative;
+    min-height: 100%;
+}
+body {
+    /* Padding top by navbar height */
+    padding-top: 70px;
+}
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background-color: #f5f5f5;
+}
+.footer .container .text-muted {
+    margin: 20px 0;
+}
+/* Sticky Footer Block End */
+
+/* Horizontal Line in Navbar Block */
+.navbar hr {
+    margin: 5px -5px;
+}
+.navbar-default hr {
+    border-color: #d5d5d5;
+}
+.navbar-inverse hr {
+    border-color: #777;
+}
+/* Horizontal Lin in Navbar Block End */
+
+/*
+** Additional CSS Block
+*/
+
+form {
+    max-width: 550px;
+    margin: 0 auto;
+}
+
+div.apply {
+    max-width: 800px;
+    margin: 0 auto;
+}
+div.apply * {
+    text-align: center;
+}
+div.apply > div {
+    margin: 20px 0;
+}
+div.apply .btn {
+    width: 75px;
+    height: 55px;
+}
+@media screen and (min-width: 768px) {
+    div.apply > div:nth-child(2) {
+        padding-right: 0;
+    }
+    div.apply > div:nth-child(3) {
+        padding-left: 0;
+    }
+}
+
+.btn-applied {
+    background-color: #f0f0f0;
+    border-color: #b8b8b8;
+}
+
+.table * {
+    text-align: center;
+    vertical-align: middle;
+}
+
+span.bold {
+    font-weight: bold;
+}
+
+/*
+** Additional CSS Block End
+*/

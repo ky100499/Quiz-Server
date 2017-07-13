@@ -1,0 +1,21 @@
+<div class="container">
+    <h3>Buzzer</h3>
+
+    <button class="btn btn-success" id="buzzer">Buzzer</button>
+</div>
+
+<script>
+    $(document).ready(function(){
+        var socket = io();
+
+        socket.emit("init", {
+            idx: "<%= user_idx %>",
+            name: "<%= user_name %>"
+        });
+
+        $("button#buzzer").on('click', function(e) {
+            e.preventDefault();
+            socket.emit("buzzer");
+        });
+    });
+</script>

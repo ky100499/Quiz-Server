@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title><%=title%></title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="/static/font-awesome-4.7.0/css/font-awesome.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/static/css/custom.css">
+
+    <!-- jQuery Version 1.11.1 -->
+    <script src="/static/js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="/static/js/bootstrap.min.js"></script>
+
+    <!-- Socket.io -->
+    <script src="/socket.io/socket.io.js"></script>
+
+    <!-- Custom JS -->
+    <script src="/static/js/custom.js"></script>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+    <!-- Navigation -->
+    <% include ./navbar.ejs %>
+
+    <!-- Page Content -->
+    <div class="container" style="padding-bottom: 20px;">
+        <%- include(page_include) %>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p class="text-muted">Copyright ⓒ 2017 Kwangyeon Lee. All rights reserved.<br>
+                <span class="pc">
+                    Bootstrap v3.3.7
+                    /
+                    jQuery v1.11.1
+                    /
+                    Node.js v6.11.1 LTS
+                </span>
+            </p>
+        </div>
+    </footer>
+
+    <!-- Alert -->
+    <script>
+        var msg = "<%= msg %>";
+        if (msg.length) alert(msg);
+    </script>
+
+    <!-- Active Navbar -->
+    <script>
+    var active = "<%= active %>";
+    if (active) {
+        $("li#" + active).addClass('active');
+    }
+    </script>
+</body>
+</html>
