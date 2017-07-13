@@ -117,6 +117,13 @@ div.apply .btn {
     border-color: #b50251;
 }
 
+.btn-success:active{
+    background-color: #b50251;
+    border-color: #b50251;
+}
+
+
+
 .btn_pushed {
 
   visibility: visible;
