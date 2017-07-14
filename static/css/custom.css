@@ -181,6 +181,14 @@ form {
     margin: 0 auto;
 }
 
+.btn-circle {
+    width: 200px;
+    height: 200px;
+    border: none;
+    border-radius: 50%;
+    font-size: 1.2em;
+}
+
 .btn-buzzer {
     width: 250px;
     height: 250px;
@@ -208,6 +216,23 @@ form {
     color: white;
     background-color: #e01770;
     border: none;
+}
+
+ul#current_users {
+    display: inline-block;
+    margin-left: -15px;
+}
+ul#current_users li {
+    font-size: 1.4em;
+}
+
+#winner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-65%);
+
+    font-size: 5em;
 }
 
 span.bold {

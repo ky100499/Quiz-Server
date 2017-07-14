@@ -91,12 +91,8 @@ io.on('connection', function(socket) {
         }
     });
 
-    socket.on("resume", function() {
+    socket.on("start", function() {
         start = true;
-        io.emit("update_status", {"clicked": (winner !== undefined || !start)});
-    });
-    socket.on("stop", function() {
-        start = false;
         io.emit("update_status", {"clicked": (winner !== undefined || !start)});
     });
     socket.on("reset", function(data) {

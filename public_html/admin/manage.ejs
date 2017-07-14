@@ -1,13 +1,16 @@
 <div class="container">
-    <h3>Admin</h3>
-
-    <div class="row">
-        <button class="btn btn-primary btn-lg" id="resume">Resume</button>
-        <button class="btn btn-success btn-lg" id="stop">Stop</button>
-        <button class="btn btn-danger btn-lg" id="reset">Reset</button>
+    <div class="row" style="margin: 20px -15px">
+        <div class="col-sm-6 text-right">
+            <button class="btn btn-primary btn-circle" id="start">Start</button>
+        </div>
+        <div class="col-sm-6 text-left">
+            <button class="btn btn-danger btn-circle" id="reset">Reset</button>
+        </div>
     </div>
 
-    <ul id="current_users"></ul>
+    <div class="text-center">
+        <ul id="current_users"></ul>
+    </div>
 </div>
 
 <script>
@@ -20,18 +23,14 @@
         socket.on("update_users", function(data) {
             str = "";
             for (var i = 0; i < data.length; i++) {
-                str += "<li>" + (i+1) + ". " + data[i].name + "</li>";
+                str += "<li>" + data[i].name + "</li>";
             }
             $("ul#current_users").html(str);
         });
 
-        $("button#resume").on('click', function(e) {
+        $("button#start").on('click', function(e) {
             e.preventDefault();
-            socket.emit("resume");
-        });
-        $("button#stop").on('click', function(e) {
-            e.preventDefault();
-            socket.emit("stop");
+            socket.emit("start");
         });
         $("button#reset").on('click', function(e) {
             e.preventDefault();
