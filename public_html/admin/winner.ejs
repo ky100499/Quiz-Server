@@ -14,10 +14,5 @@
         socket.on("update_winner", function(data) {
             $("#winner").text((data !== undefined && data !== null) ? data.name : "");
         });
-
-        $("button#reset").on('click', function(e) {
-            e.preventDefault();
-            socket.emit("reset");
-        });
     });
 </script>

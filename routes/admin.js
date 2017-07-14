@@ -1,6 +1,6 @@
 var router = require("express").Router();
 
-router.get('/users', function(req, res) {
+router.get('/manage', function(req, res) {
     if (/*req.session.user_idx != 602*/ !req.session.user_idx) {
         res.redirect("/");
 
@@ -12,7 +12,7 @@ router.get('/users', function(req, res) {
             "active": "",
             "user_idx": req.session.user_idx,
             "user_name": req.session.user_name,
-            "page_include": "./admin/users"
+            "page_include": "./admin/manage"
         });
     }
 });

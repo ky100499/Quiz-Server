@@ -30,6 +30,7 @@ app.get('/', function(req, res) {
 
 var socket_ids = [];
 var winner;
+var start = false;
 
 io.on('connection', function(socket) {
 
@@ -44,7 +45,7 @@ io.on('connection', function(socket) {
             response.push(getSocketInfo(io.sockets.sockets, socket_ids[i]));
         }
         io.emit("update_users", response);
-        io.emit("update_status", {"clicked": (winner !== undefined)});
+        io.emit("update_status", {"clicked": (winner !== undefined || !start)});
     });
 
     socket.on("disconnect", function() {
@@ -63,7 +64,7 @@ io.on('connection', function(socket) {
             winner = undefined;
         }
         io.emit("update_winner", getSocketInfo(io.sockets.sockets, winner));
-        io.emit("update_status", {"clicked": (winner !== undefined)});
+        io.emit("update_status", {"clicked": (winner !== undefined || !start)});
     });
 
     socket.on("init_users", function(data) {
@@ -79,17 +80,30 @@ io.on('connection', function(socket) {
     });
 
     socket.on("buzzer", function(data) {
-        if (winner === undefined) {
-            winner = socket.id;
+        if (start) {
+            if (winner === undefined) {
+                winner = socket.id;
+            }
+            io.emit("update_winner", getSocketInfo(io.sockets.sockets, winner));
+            io.emit("update_status", {"clicked": (winner !== undefined || !start)});
+        } else {
+            //asdf
         }
-        io.emit("update_winner", getSocketInfo(io.sockets.sockets, winner));
-        io.emit("update_status", {"clicked": (winner !== undefined)});
     });
 
+    socket.on("resume", function() {
+        start = true;
+        io.emit("update_status", {"clicked": (winner !== undefined || !start)});
+    });
+    socket.on("stop", function() {
+        start = false;
+        io.emit("update_status", {"clicked": (winner !== undefined || !start)});
+    });
     socket.on("reset", function(data) {
+        start = false;
         winner = undefined;
         io.emit("update_winner", getSocketInfo(io.sockets.sockets, winner));
-        io.emit("update_status", {"clicked": (winner !== undefined)});
+        io.emit("update_status", {"clicked": (winner !== undefined || !start)});
     });
 });
 
