@@ -18,7 +18,9 @@
                 $("audio#buzzer-audio")[0].pause();
                 $("audio#buzzer-audio")[0].currentTime = 0;
             }
+            new Audio('../static/audio/buzzer.mp3').play();
             $("#winner").text(name);
+
         });
     });
 </script>
