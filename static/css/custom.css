@@ -266,9 +266,10 @@ ul#current_users li {
 }
 #winner {
     position: absolute;
+    width: 100%;
+    text-align: center;
     top: 50%;
-    left: 50%;
-    transform: translateX(-50%) translateY(-65%);
+    transform: translateY(-65%);
 
     font-size: 5em;
 }
