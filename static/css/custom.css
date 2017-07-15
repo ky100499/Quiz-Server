@@ -235,6 +235,23 @@ ul#current_users li {
     font-size: 5em;
 }
 
+@media screen and (min-width: 768px) {
+    .text-sm-right {
+        text-align: right;
+    }
+    .text-sm-left {
+        text-align: left;
+    }
+}
+@media screen and (max-width: 767px) {
+    .text-sm-right, .text-sm-left {
+        text-align: center;
+    }
+}
+.text-sm-right, .text-sm-left {
+    margin-bottom: 10px;
+}
+
 span.bold {
     font-weight: bold;
 }

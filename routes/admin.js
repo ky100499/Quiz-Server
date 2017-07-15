@@ -9,7 +9,7 @@ router.get('/manage', function(req, res) {
         res.render("base", {
             "title": "Admin",
             "msg": "",
-            "active": "",
+            "active": "admin",
             "user_idx": req.session.user_idx,
             "user_name": req.session.user_name,
             "page_include": "./admin/manage"
@@ -26,7 +26,7 @@ router.get('/winner', function(req, res) {
         res.render("base", {
             "title": "Admin",
             "msg": "",
-            "active": "",
+            "active": "admin",
             "user_idx": req.session.user_idx,
             "user_name": req.session.user_name,
             "page_include": "./admin/winner"

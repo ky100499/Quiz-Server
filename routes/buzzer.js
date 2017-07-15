@@ -7,7 +7,7 @@ router.get(/.*/, function(req, res) {
         res.render("base", {
             "title": "Buzzer",
             "msg": "",
-            "active": "",
+            "active": "buzzer",
             "user_idx": req.session.user_idx,
             "user_name": req.session.user_name,
             "page_include": "./buzzer/index"

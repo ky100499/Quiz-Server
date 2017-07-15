@@ -1,6 +1,7 @@
 <div class="container">
     <span id="winner"></span>
 </div>
+<audio src="/static/audio/buzzer.mp3" id="buzzer-audio"></audio>
 
 <script>
     $(document).ready(function(){
@@ -9,7 +10,15 @@
         socket.emit("init_winner");
 
         socket.on("update_winner", function(data) {
-            $("#winner").text((data !== undefined && data !== null) ? data.name : "");
+            var name = "";
+            if (data !== undefined && data !== null) {
+                name = data.name;
+                $("audio#buzzer-audio")[0].play();
+            } else {
+                $("audio#buzzer-audio")[0].pause();
+                $("audio#buzzer-audio")[0].currentTime = 0;
+            }
+            $("#winner").text(name);
         });
     });
 </script>
