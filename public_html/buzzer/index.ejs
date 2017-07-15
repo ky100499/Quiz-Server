@@ -1,5 +1,5 @@
 <div class="container">
-    <button class="btn btn-buzzer btn-lg" id="buzzer">Buzzer</button>
+    <button class="btn btn-buzzer btn-lg" id="buzzer">PUSH</button>
 </div>
 
 <script>
@@ -14,7 +14,7 @@
         socket.on("update_status", function(data) {
             if (data.clicked) {
                 $("button#buzzer").attr("disabled", true);
-                
+
             } else {
                 $("button#buzzer").attr("disabled", false);
             }

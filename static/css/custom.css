@@ -65,7 +65,7 @@ body {
         border: none;
     }
     .navbar-inverse .navbar-brand {
-        color: #dfdfdf;
+        color: #ffffff;
     }
     .navbar-inverse .navbar-brand:hover,
     .navbar-inverse .navbar-brand:focus {
@@ -180,6 +180,32 @@ form {
     max-width: 550px;
     margin: 0 auto;
 }
+
+.btn-login {
+  color: #FFFFFF;
+  background-color: #ec2a7f;
+  border-color: #ec2a7f;
+}
+
+.btn-login:hover {
+  color: #FFFFFF;
+  background-color: #e52275;
+  border-color: #e52275;
+}
+
+.btn-login:active {
+  color: #FFFFFF;
+  background-color: #e01770;
+  border-color: #e01770;
+}
+
+.btn-login:focus {
+  color: #FFFFFF;
+  background-color: #e01770;
+  border-color: #e01770;
+}
+
+
 
 .btn-circle {
     width: 200px;
