@@ -15,7 +15,6 @@
 
 <script>
     $(document).ready(function(){
-        // socket.io 서버에 접속한다
         var socket = io();
 
         socket.emit("init_users");
@@ -26,7 +25,7 @@
                 str += "<li>" + data[i].name + "</li>";
             }
             $("ul#current_users").html(str);
-            
+
         });
 
         $("button#start").on('click', function(e) {

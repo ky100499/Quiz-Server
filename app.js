@@ -87,8 +87,6 @@ io.on('connection', function(socket) {
             }
             io.emit("update_winner", getSocketInfo(io.sockets.sockets, winner));
             io.emit("update_status", {"clicked": (winner !== undefined || !start)});
-        } else {
-            //asdf
         }
     });
 

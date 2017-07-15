@@ -182,30 +182,25 @@ form {
 }
 
 .btn-login {
-  color: #FFFFFF;
-  background-color: #ec2a7f;
-  border-color: #ec2a7f;
+    color: #FFFFFF;
+    background-color: #ec2a7f;
+    border-color: #ec2a7f;
 }
-
 .btn-login:hover {
-  color: #FFFFFF;
-  background-color: #e52275;
-  border-color: #e52275;
+    color: #FFFFFF;
+    background-color: #e52275;
+    border-color: #e52275;
 }
-
 .btn-login:active {
-  color: #FFFFFF;
-  background-color: #e01770;
-  border-color: #e01770;
+    color: #FFFFFF;
+    background-color: #e01770;
+    border-color: #e01770;
 }
-
 .btn-login:focus {
-  color: #FFFFFF;
-  background-color: #e01770;
-  border-color: #e01770;
+    color: #FFFFFF;
+    background-color: #e01770;
+    border-color: #e01770;
 }
-
-
 
 .btn-circle {
     width: 200px;

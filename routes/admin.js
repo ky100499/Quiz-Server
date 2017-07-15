@@ -18,7 +18,7 @@ router.get('/manage', function(req, res) {
 });
 
 router.get('/winner', function(req, res) {
-    if (req.session.user_idx != 602) {
+    if (/*req.session.user_idx != 602*/ !req.session.user_idx) {
         res.redirect("/");
 
     } else {

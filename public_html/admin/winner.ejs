@@ -1,7 +1,7 @@
 <div class="container">
     <span id="winner"></span>
 </div>
-<audio src="../static/audio/buzzer.mp3" id="buzzer-audio"></audio>
+<audio src="/static/audio/buzzer.mp3" id="buzzer-audio"></audio>
 
 <script>
     $(document).ready(function(){
@@ -18,9 +18,7 @@
                 $("audio#buzzer-audio")[0].pause();
                 $("audio#buzzer-audio")[0].currentTime = 0;
             }
-
             $("#winner").text(name);
-
         });
     });
 </script>
