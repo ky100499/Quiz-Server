@@ -1,6 +1,5 @@
 var router = require("express").Router();
 var http = require("http");
-var crc32 = require("crc-32");
 var util = require("util");
 
 router.route("/login/")

@@ -20,6 +20,7 @@ app.set('view engine', 'ejs');
 app.engine('html', require('ejs').renderFile);
 
 app.use('/static', express.static("static"));
+
 app.use('/auth', require("./routes/auth"));
 app.use('/buzzer', require("./routes/buzzer"));
 app.use('/admin', require("./routes/admin"));
