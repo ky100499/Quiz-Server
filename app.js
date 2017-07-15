@@ -32,6 +32,7 @@ app.get('/', function(req, res) {
 var socket_ids = [];
 var winner;
 var start = false;
+var point = {};
 
 io.on('connection', function(socket) {
 
@@ -40,6 +41,9 @@ io.on('connection', function(socket) {
 
         socket.idx = data.idx;
         socket.name = data.name;
+
+        point[data.name] = 0;
+        io.emit("update_point", point);
 
         response = [];
         for (i = 0; i < socket_ids.length; i++) {
@@ -66,6 +70,9 @@ io.on('connection', function(socket) {
         }
         io.emit("update_winner", getSocketInfo(io.sockets.sockets, winner));
         io.emit("update_status", {"clicked": (winner !== undefined || !start)});
+
+        delete point[socket.name];
+        io.emit("update_point", point);
     });
 
     socket.on("init_users", function(data) {
@@ -78,6 +85,7 @@ io.on('connection', function(socket) {
 
     socket.on("init_winner", function(data) {
         io.emit("update_winner", getSocketInfo(io.sockets.sockets, winner));
+        io.emit("update_point", point);
     });
 
     socket.on("buzzer", function(data) {
@@ -99,6 +107,22 @@ io.on('connection', function(socket) {
         winner = undefined;
         io.emit("update_winner", getSocketInfo(io.sockets.sockets, winner));
         io.emit("update_status", {"clicked": (winner !== undefined || !start)});
+    });
+
+    socket.on("point_up", function(data) {
+        point[data.name]++;
+        io.emit("update_point", point);
+    });
+    socket.on("point_down", function(data) {
+        point[data.name]--;
+        if (point[data.name] < 0) {
+            point[data.name] = 0;
+        }
+        io.emit("update_point", point);
+    });
+
+    socket.on("delete_user", function(data) {
+        io.sockets.sockets[data.id].disconnect();
     });
 });
 

@@ -1,5 +1,13 @@
 <div class="container">
-    <span id="winner"></span>
+    <div id="point">
+        <div class="point-item">
+            <h4 class="text-center">이광연</h4>
+            <h3 class="text-center">0</h3>
+        </div>
+    </div>
+    <div id="wrap-winner">
+        <span id="winner"></span>
+    </div>
 </div>
 <audio src="/static/audio/buzzer.mp3" id="buzzer-audio"></audio>
 
@@ -19,6 +27,19 @@
                 $("audio#buzzer-audio")[0].currentTime = 0;
             }
             $("#winner").text(name);
+        });
+
+        socket.on("update_point", function(data) {
+            var str = "";
+            for (k in data) {
+                str += '<div class="point-item">'
+                + '<h4 class="text-center">' + k + '</h4>'
+                + '<h3 class="text-center">' + data[k] + '</h3>'
+                + '</div>';
+            }
+            $("#point").html(str);
+
+            setPointHeight();
         });
     });
 </script>

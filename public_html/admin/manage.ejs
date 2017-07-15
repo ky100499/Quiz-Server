@@ -14,18 +14,23 @@
 </div>
 
 <script>
+    var socket;
     $(document).ready(function(){
-        var socket = io();
+        socket = io();
 
         socket.emit("init_users");
 
         socket.on("update_users", function(data) {
             str = "";
             for (var i = 0; i < data.length; i++) {
-                str += "<li>" + data[i].name + "</li>";
+                str += "<li>"
+                    + data[i].name
+                    + ' <i class="fa fa-chevron-up" onclick="point_up(\'' + data[i].name + '\')" aria-hidden="true"></i>'
+                    + ' <i class="fa fa-chevron-down" onclick="point_down(\'' + data[i].name + '\')" aria-hidden="true"></i>'
+                    + ' <i class="fa fa-times" onclick="delete_user(\'' + data[i].id + '\')" aria-hidden="true"></i>'
+                    + "</li>";
             }
             $("ul#current_users").html(str);
-
         });
 
         $("button#start").on('click', function(e) {
@@ -37,4 +42,14 @@
             socket.emit("reset");
         });
     });
+
+    function point_up(name) {
+        socket.emit("point_up", {"name": name});
+    }
+    function point_down(name) {
+        socket.emit("point_down", {"name": name});
+    }
+    function delete_user(id) {
+        socket.emit("delete_user", {"id": id});
+    }
 </script>
