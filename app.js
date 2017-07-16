@@ -123,6 +123,12 @@ io.on('connection', function(socket) {
         io.emit("update_point", point);
         io.sockets.sockets[data.id].disconnect();
     });
+    socket.on("delete-point", function(data) {
+        if (point[data.name] !== undefined) {
+            delete point[data.name];
+        }
+        io.emit("update_point", point);
+    });
 });
 
 function getSocketInfo(sockets, id) {

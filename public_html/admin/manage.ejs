@@ -9,6 +9,10 @@
     </div>
 
     <div class="text-center">
+        Delete from Point: <input type="text" id="ipt-delete" class="form-control" style="max-width: 100px; display: inline">
+    </div>
+
+    <div class="text-center">
         <ul id="current_users"></ul>
     </div>
 </div>
@@ -40,6 +44,14 @@
         $("button#reset").on('click', function(e) {
             e.preventDefault();
             socket.emit("reset");
+        });
+
+        $("#ipt-delete").on('keydown', function(e) {
+            e.preventDefault;
+            if (e.keyCode == 10 || e.keyCode == 13) {
+                socket.emit("delete-point", {name: $(this).val()});
+                $(this).val("");
+            }
         });
     });
 
