@@ -34,6 +34,8 @@ var winner;
 var start = false;
 var point = {};
 
+const pointAtOnce = 100;
+
 io.on('connection', function(socket) {
 
     socket.on("init", function(data) {
@@ -43,7 +45,14 @@ io.on('connection', function(socket) {
         socket.name = data.name;
 
         point[data.name] = (point[data.name] === undefined) ? 0 : point[data.name];
-        io.emit("update_point", point);
+        response = {};
+        for (i = 0; i < socket_ids.length; i++) {
+            s = getSocketInfo(io.sockets.sockets, socket_ids[i]);
+            if (s.name in point) {
+                response[s.name] = point[s.name];
+            }
+        }
+        io.emit("update_point", response);
 
         response = [];
         for (i = 0; i < socket_ids.length; i++) {
@@ -70,6 +79,15 @@ io.on('connection', function(socket) {
         }
         io.emit("update_winner", getSocketInfo(io.sockets.sockets, winner));
         io.emit("update_status", {"clicked": (winner !== undefined || !start)});
+
+        response = {};
+        for (i = 0; i < socket_ids.length; i++) {
+            s = getSocketInfo(io.sockets.sockets, socket_ids[i]);
+            if (s.name in point) {
+                response[s.name] = point[s.name];
+            }
+        }
+        io.emit("update_point", response);
     });
 
     socket.on("init_users", function(data) {
@@ -82,7 +100,14 @@ io.on('connection', function(socket) {
 
     socket.on("init_winner", function(data) {
         io.emit("update_winner", getSocketInfo(io.sockets.sockets, winner));
-        io.emit("update_point", point);
+        response = {};
+        for (i = 0; i < socket_ids.length; i++) {
+            s = getSocketInfo(io.sockets.sockets, socket_ids[i]);
+            if (s.name in point) {
+                response[s.name] = point[s.name];
+            }
+        }
+        io.emit("update_point", response);
     });
 
     socket.on("buzzer", function(data) {
@@ -107,27 +132,42 @@ io.on('connection', function(socket) {
     });
 
     socket.on("point_up", function(data) {
-        point[data.name]++;
-        io.emit("update_point", point);
+        point[data.name] += pointAtOnce;
+        response = {};
+        for (i = 0; i < socket_ids.length; i++) {
+            s = getSocketInfo(io.sockets.sockets, socket_ids[i]);
+            if (s.name in point) {
+                response[s.name] = point[s.name];
+            }
+        }
+        io.emit("update_point", response);
     });
     socket.on("point_down", function(data) {
-        point[data.name]--;
+        point[data.name] -= pointAtOnce;
         if (point[data.name] < 0) {
             point[data.name] = 0;
         }
-        io.emit("update_point", point);
+        response = {};
+        for (i = 0; i < socket_ids.length; i++) {
+            s = getSocketInfo(io.sockets.sockets, socket_ids[i]);
+            if (s.name in point) {
+                response[s.name] = point[s.name];
+            }
+        }
+        io.emit("update_point", response);
     });
 
     socket.on("delete_user", function(data) {
         delete point[data.name];
-        io.emit("update_point", point);
-        io.sockets.sockets[data.id].disconnect();
-    });
-    socket.on("delete-point", function(data) {
-        if (point[data.name] !== undefined) {
-            delete point[data.name];
+        response = {};
+        for (i = 0; i < socket_ids.length; i++) {
+            s = getSocketInfo(io.sockets.sockets, socket_ids[i]);
+            if (s.name in point) {
+                response[s.name] = point[s.name];
+            }
         }
-        io.emit("update_point", point);
+        io.emit("update_point", response);
+        io.sockets.sockets[data.id].disconnect();
     });
 });
 
