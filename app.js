@@ -34,7 +34,7 @@ var winner;
 var start = false;
 var point = {};
 
-const pointAtOnce = 100;
+const pointAtOnce = 1;
 
 io.on('connection', function(socket) {
 
